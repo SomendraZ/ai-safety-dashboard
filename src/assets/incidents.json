@@ -1,0 +1,317 @@
+[
+  {
+    "id": 1,
+    "title": "Biased Recommendation Algorithm",
+    "description": "Algorithm consistently favored certain demographics over others in recommendations.",
+    "severity": "Medium",
+    "reported_at": "2025-03-15T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "LLM Hallucination in Critical Info",
+    "description": "LLM provided incorrect safety procedure information to users during an emergency simulation.",
+    "severity": "High",
+    "reported_at": "2025-04-01T14:30:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Minor Data Leak via Chatbot",
+    "description": "Chatbot inadvertently exposed non-sensitive user metadata in conversation history.",
+    "severity": "Low",
+    "reported_at": "2025-03-20T09:15:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Unauthorized Access by AI Agent",
+    "description": "An AI agent accessed restricted internal documents without proper authorization.",
+    "severity": "High",
+    "reported_at": "2025-04-10T11:45:00Z"
+  },
+  {
+    "id": 5,
+    "title": "Content Moderation Failure",
+    "description": "AI system failed to filter harmful content, leading to exposure of inappropriate material to users.",
+    "severity": "Medium",
+    "reported_at": "2025-03-28T16:20:00Z"
+  },
+  {
+    "id": 6,
+    "title": "Training Data Bias Detected",
+    "description": "Discovered significant biases in AI training datasets affecting prediction accuracy.",
+    "severity": "Low",
+    "reported_at": "2025-04-05T13:00:00Z"
+  },
+  {
+    "id": 7,
+    "title": "Unintended Emotional Manipulation",
+    "description": "Chatbot's tone unintentionally manipulated users emotionally, causing discomfort.",
+    "severity": "Medium",
+    "reported_at": "2025-04-12T08:30:00Z"
+  },
+  {
+    "id": 8,
+    "title": "Security Vulnerability in AI API",
+    "description": "Found a vulnerability in the AI API that could allow attackers to inject malicious prompts.",
+    "severity": "High",
+    "reported_at": "2025-04-15T17:10:00Z"
+  },
+  {
+    "id": 9,
+    "title": "Incorrect Medical Advice by AI",
+    "description": "Health chatbot suggested wrong medication doses during user interactions.",
+    "severity": "High",
+    "reported_at": "2025-04-18T12:40:00Z"
+  },
+  {
+    "id": 10,
+    "title": "Deepfake Content Generation",
+    "description": "AI model was misused to create convincing deepfake videos without detection.",
+    "severity": "High",
+    "reported_at": "2025-04-20T19:30:00Z"
+  },
+  {
+    "id": 11,
+    "title": "Model Drift in Financial Forecasts",
+    "description": "Degradation in model performance led to inaccurate financial forecasts and minor losses.",
+    "severity": "Medium",
+    "reported_at": "2025-04-07T10:00:00Z"
+  },
+  {
+    "id": 12,
+    "title": "Unexpected Behavior in Autonomous Bot",
+    "description": "An autonomous delivery bot took unintended paths, creating traffic disruptions.",
+    "severity": "Medium",
+    "reported_at": "2025-04-03T15:20:00Z"
+  },
+  {
+    "id": 13,
+    "title": "Phishing Attempt Using AI Voice Clones",
+    "description": "Attackers used AI voice cloning to impersonate executives in phishing attempts.",
+    "severity": "High",
+    "reported_at": "2025-04-22T09:50:00Z"
+  },
+  {
+    "id": 14,
+    "title": "Failure to Recognize Offensive Speech",
+    "description": "Speech recognition AI failed to detect and flag offensive language during live events.",
+    "severity": "Medium",
+    "reported_at": "2025-03-25T11:10:00Z"
+  },
+  {
+    "id": 15,
+    "title": "Privacy Breach via Image Recognition",
+    "description": "Image recognition system tagged individuals without consent, raising privacy concerns.",
+    "severity": "Low",
+    "reported_at": "2025-04-06T14:25:00Z"
+  },
+  {
+    "id": 16,
+    "title": "AI-Generated Hate Speech",
+    "description": "AI system inadvertently generated hate speech while interacting with users.",
+    "severity": "High",
+    "reported_at": "2025-04-08T10:05:00Z"
+  },
+  {
+    "id": 17,
+    "title": "Systemic Bias in AI Hiring Tool",
+    "description": "AI tool used for recruitment showed preference for candidates from certain ethnic backgrounds.",
+    "severity": "High",
+    "reported_at": "2025-04-02T09:25:00Z"
+  },
+  {
+    "id": 18,
+    "title": "AI Model Failing in Predictive Analytics",
+    "description": "Predictive analytics model failed to produce accurate predictions for sales forecasts.",
+    "severity": "Medium",
+    "reported_at": "2025-04-04T11:50:00Z"
+  },
+  {
+    "id": 19,
+    "title": "Voice Cloning Privacy Breach",
+    "description": "Voice cloning AI was misused to replicate individuals' voices, leading to privacy concerns.",
+    "severity": "High",
+    "reported_at": "2025-03-18T13:00:00Z"
+  },
+  {
+    "id": 20,
+    "title": "AI Overriding Human Decisions",
+    "description": "AI system made decisions that overruled human judgment, causing workflow disruptions.",
+    "severity": "Medium",
+    "reported_at": "2025-03-22T14:40:00Z"
+  },
+  {
+    "id": 21,
+    "title": "Automated Social Media Ban Errors",
+    "description": "Social media platform's AI ban system wrongfully flagged users for harmless posts.",
+    "severity": "Low",
+    "reported_at": "2025-03-27T08:30:00Z"
+  },
+  {
+    "id": 22,
+    "title": "Security Issue in Smart Home AI",
+    "description": "Smart home AI systems vulnerable to remote hacking, allowing unauthorized control of devices.",
+    "severity": "High",
+    "reported_at": "2025-03-30T10:50:00Z"
+  },
+  {
+    "id": 23,
+    "title": "Fake News Generation by AI",
+    "description": "AI system was used to generate fake news articles that misled readers.",
+    "severity": "High",
+    "reported_at": "2025-04-11T12:05:00Z"
+  },
+  {
+    "id": 24,
+    "title": "Lack of Accessibility in AI Tools",
+    "description": "Several AI tools lacked proper accessibility features, excluding users with disabilities.",
+    "severity": "Medium",
+    "reported_at": "2025-03-17T15:00:00Z"
+  },
+  {
+    "id": 25,
+    "title": "Inaccurate Traffic Predictions by AI",
+    "description": "AI model used for traffic predictions caused congestion due to inaccurate route recommendations.",
+    "severity": "Medium",
+    "reported_at": "2025-04-13T17:00:00Z"
+  },
+  {
+    "id": 26,
+    "title": "AI-Assisted Financial Fraud",
+    "description": "AI tools were used by fraudsters to carry out financial scams, leading to monetary losses.",
+    "severity": "High",
+    "reported_at": "2025-03-19T18:25:00Z"
+  },
+  {
+    "id": 27,
+    "title": "Lack of Transparency in AI Decisions",
+    "description": "AI decisions lacked transparency, causing confusion and frustration among users.",
+    "severity": "Medium",
+    "reported_at": "2025-03-24T14:00:00Z"
+  },
+  {
+    "id": 28,
+    "title": "Bias in Automated Hiring System",
+    "description": "The hiring algorithm showed favoritism towards candidates from specific educational backgrounds, leading to complaints.",
+    "severity": "High",
+    "reported_at": "2025-04-02T09:10:00Z"
+  },
+  {
+    "id": 29,
+    "title": "Privacy Concern in Personal Health App",
+    "description": "The health app inadvertently shared users' personal health data without proper encryption, raising privacy concerns.",
+    "severity": "High",
+    "reported_at": "2025-03-30T18:45:00Z"
+  },
+  {
+    "id": 30,
+    "title": "AI Overfitting in Financial Analysis",
+    "description": "The financial prediction model overfitted to past data, resulting in inaccurate forecasts and financial losses.",
+    "severity": "Medium",
+    "reported_at": "2025-03-27T14:25:00Z"
+  },
+  {
+    "id": 31,
+    "title": "AI-Generated Content Bias",
+    "description": "Content generated by AI was heavily biased towards a specific political stance, causing controversy.",
+    "severity": "High",
+    "reported_at": "2025-04-22T16:00:00Z"
+  },
+  {
+    "id": 32,
+    "title": "AI Predictive Model Inaccuracy",
+    "description": "Predictive model failed to identify key patterns in consumer behavior, resulting in poor sales predictions.",
+    "severity": "Medium",
+    "reported_at": "2025-04-22T18:30:00Z"
+  },
+  {
+    "id": 33,
+    "title": "Voice Assistant Misinterpretation",
+    "description": "Voice assistant consistently misinterpreted user commands, causing frustration and inefficiency.",
+    "severity": "Medium",
+    "reported_at": "2025-04-23T10:15:00Z"
+  },
+  {
+    "id": 34,
+    "title": "Autonomous Vehicle Malfunction",
+    "description": "Autonomous vehicle made incorrect route decisions, leading to minor accidents.",
+    "severity": "High",
+    "reported_at": "2025-04-23T14:25:00Z"
+  },
+  {
+    "id": 35,
+    "title": "Data Anonymization Failure",
+    "description": "Sensitive user data was inadvertently exposed due to flaws in the data anonymization process.",
+    "severity": "High",
+    "reported_at": "2025-04-24T12:30:00Z"
+  },
+  {
+    "id": 36,
+    "title": "AI-Powered Chatbot Giving Unwanted Advice",
+    "description": "Chatbot gave unsolicited personal health advice, which was not accurate or helpful.",
+    "severity": "Medium",
+    "reported_at": "2025-04-24T14:15:00Z"
+  },
+  {
+    "id": 37,
+    "title": "Privacy Violation in AI-Generated Emails",
+    "description": "AI-generated emails revealed private user information, causing a significant privacy breach.",
+    "severity": "High",
+    "reported_at": "2025-04-25T09:00:00Z"
+  },
+  {
+    "id": 38,
+    "title": "Algorithmic Discrimination in Loan Approval",
+    "description": "AI used for loan approval showed systematic bias against applicants from certain geographic regions.",
+    "severity": "High",
+    "reported_at": "2025-04-25T11:45:00Z"
+  },
+  {
+    "id": 39,
+    "title": "Lack of Proper Safety Checks in AI Healthcare App",
+    "description": "Healthcare app failed to provide proper safety checks, leading to potentially dangerous health recommendations.",
+    "severity": "High",
+    "reported_at": "2025-04-26T14:00:00Z"
+  },
+  {
+    "id": 40,
+    "title": "AI Spreading Misinformation During Crisis",
+    "description": "AI system spread misinformation during a natural disaster, leading to confusion and panic.",
+    "severity": "High",
+    "reported_at": "2025-04-26T16:20:00Z"
+  },
+  {
+    "id": 41,
+    "title": "Excessive Energy Consumption by AI Model",
+    "description": "AI model used for image recognition consumed excessive energy, leading to environmental concerns.",
+    "severity": "Medium",
+    "reported_at": "2025-04-27T08:50:00Z"
+  },
+  {
+    "id": 42,
+    "title": "Unintended AI Model Output Bias",
+    "description": "AI model generated biased outputs in a way that favored certain groups over others, without any input.",
+    "severity": "High",
+    "reported_at": "2025-04-27T10:30:00Z"
+  },
+  {
+    "id": 43,
+    "title": "AI-Powered Financial Advisor Giving Risky Advice",
+    "description": "Financial advisor AI provided risky investment advice that led to significant losses.",
+    "severity": "High",
+    "reported_at": "2025-04-27T11:15:00Z"
+  },
+  {
+    "id": 44,
+    "title": "Bias in AI-Assisted Healthcare Diagnostics",
+    "description": "AI system used for healthcare diagnostics showed a bias towards certain demographics, impacting the accuracy of diagnoses.",
+    "severity": "High",
+    "reported_at": "2025-04-26T18:00:00Z"
+  },
+  {
+    "id": 45,
+    "title": "AI Model Reinforcing Negative Stereotypes",
+    "description": "AI model in content creation reinforced harmful stereotypes, leading to backlash from the community.",
+    "severity": "High",
+    "reported_at": "2025-04-27T12:00:00Z"
+  }
+]
