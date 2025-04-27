@@ -1,73 +1,43 @@
 # AI Safety Dashboard
 
-The **AI Safety Dashboard** is a project designed to monitor, evaluate, and ensure the safety and ethical use of AI systems. This tool provides insights into AI behavior, tracks potential risks, and helps developers implement safety measures effectively.
+## Project Description
+AI Safety Dashboard is a React-based web application designed to monitor and visualize safety incidents in AI systems. It provides tools for incident reporting, severity analysis, and timeline tracking through interactive charts and data visualizations. The project aims to enhance transparency and decision-making in AI safety.
 
-## Features
+## Installation and Setup Instructions
+Follow these steps to set up the project locally:
 
-- **Risk Monitoring**: Identify and track potential safety risks in AI systems.
-- **Evaluation Metrics**: Analyze AI performance using predefined safety and ethical benchmarks.
-- **Customizable Dashboards**: Tailor the dashboard to specific project needs.
-- **Real-Time Insights**: Get live updates on AI behavior and safety compliance.
-
-## Technology Stack
-
-This project is built using the following technologies:
-
-- **Frontend**: React.js
-- **Backend**: Node.js with Express.js
-- **Package Manager**: npm
-- **Database**: MongoDB (optional, depending on use case)
-
-## Installation and Setup
-
-Follow these steps to build, install dependencies, and run the project locally:
-
-1. **Clone the repository**:
+1. **Clone the Repository**:
   ```bash
-  git clone https://github.com/your-username/ai-safety-dashboard.git
-  ```
-
-2. **Navigate to the project directory**:
-  ```bash
+  git clone https://github.com/SomendraZ/ai-safety-dashboard.git
   cd ai-safety-dashboard
   ```
 
-3. **Install dependencies**:
+2. **Install Dependencies**:
   Ensure you have Node.js and npm installed. Then, run:
   ```bash
   npm install
   ```
 
-4. **Build the project**:
-  If the project requires a build step (e.g., for production), run:
-  ```bash
-  npm run build
-  ```
-
-5. **Start the application**:
+3. **Start the Development Server**:
   ```bash
   npm start
   ```
 
-6. **Access the application**:
+4. **Access the Application**:
   Open your browser and navigate to `http://localhost:3000`.
 
-## Contributing
+## Technologies Used
+- **React.js**: Frontend framework for building the user interface.
+- **Node.js**: Backend runtime environment.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Chart.js**: Library for creating interactive charts.
 
-Contributions are welcome! Please follow these steps:
+## Features
+- **Incident Reporting**: Log and track AI safety incidents.
+- **Severity Pie Charts**: Visualize incident severity distribution.
+- **Timeline Line Charts**: Analyze incidents over time.
+- **Data Visualization**: Interactive and dynamic charts for better insights.
 
-1. Fork the repository.
-2. Create a new branch:
-  ```bash
-  git checkout -b feature-name
-  ```
-3. Commit your changes and push the branch.
-4. Submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For questions or feedback, feel free to reach out to the project maintainers.
+## Challenges and Design Decisions
+- **Dynamic Chart Updates**: Implemented efficient state management to ensure real-time updates in charts.
+- **State Management**: Leveraged React's state and context API for seamless data flow across components.
