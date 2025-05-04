@@ -74,17 +74,21 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
       ))}
 
       {/* Pagination */}
-      <div className="flex justify-center items-center gap-4 mt-6">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-2 text-sm rounded-lg bg-[#2C2C2C] text-gray-300 hover:bg-[#3a3a3a] disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`px-3 py-2 text-sm rounded-lg ${
+            currentPage === 1
+              ? "bg-[#2C2C2C] text-gray-300 cursor-not-allowed"
+              : "bg-[#4CAF50] text-white hover:bg-[#45a049]"
+          } disabled:opacity-50`}
         >
           Previous
         </button>
 
         {/* Page Numbers */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap justify-center">
           {Array.from({ length: totalPages }, (_, index) => {
             const page = index + 1;
             const isActive = page === currentPage;
@@ -92,7 +96,7 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
               <button
                 key={page}
                 onClick={() => handlePageChange(page)}
-                className={`px-3 py-2 text-sm rounded-lg transition-all duration-150 ${
+                className={`px-3 py-2 text-sm rounded-lg transition-all duration-150 cursor-pointer ${
                   isActive
                     ? "bg-blue-600 text-white font-semibold"
                     : "bg-[#2C2C2C] text-gray-300 hover:bg-[#3a3a3a]"
@@ -107,7 +111,11 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-2 text-sm rounded-lg bg-[#2C2C2C] text-gray-300 hover:bg-[#3a3a3a] disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`px-3 py-2 text-sm rounded-lg ${
+            currentPage === totalPages
+              ? "bg-[#2C2C2C] text-gray-300 cursor-not-allowed"
+              : "bg-[#4CAF50] text-white hover:bg-[#45a049]"
+          } disabled:opacity-50`}
         >
           Next
         </button>
