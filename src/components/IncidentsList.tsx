@@ -81,7 +81,7 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
           className={`px-3 py-2 text-sm rounded-lg ${
             currentPage === 1
               ? "bg-[#2C2C2C] text-gray-300 cursor-not-allowed"
-              : "bg-[#4CAF50] text-white hover:bg-[#45a049]"
+              : "bg-[#4CAF50] text-white hover:bg-[#45a049] cursor-pointer"
           } disabled:opacity-50`}
         >
           Previous
@@ -114,7 +114,7 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
           className={`px-3 py-2 text-sm rounded-lg ${
             currentPage === totalPages
               ? "bg-[#2C2C2C] text-gray-300 cursor-not-allowed"
-              : "bg-[#4CAF50] text-white hover:bg-[#45a049]"
+              : "bg-[#4CAF50] text-white hover:bg-[#45a049] cursor-pointer"
           } disabled:opacity-50`}
         >
           Next
