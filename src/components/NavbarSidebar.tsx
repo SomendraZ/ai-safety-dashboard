@@ -1,4 +1,3 @@
-// NavbarSidebar.tsx
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -12,7 +11,7 @@ const NavbarSidebar: React.FC = () => {
   };
 
   const closeSidebar = () => {
-    setIsSidebarOpen(false); // Close the sidebar when clicking "Dashboard"
+    setIsSidebarOpen(false);
   };
 
   return (

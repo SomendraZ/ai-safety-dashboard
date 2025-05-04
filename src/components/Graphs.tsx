@@ -1,94 +1,164 @@
-import React from "react";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-} from "recharts";
+import React, { useMemo, useState } from "react";
+import { Chart } from "react-google-charts";
 
-// Types
-interface GraphsProps {
-  pieData: { name: string; value: number }[];
-  lineChartData: { date: string; count: number }[];
-  lineChartRange: "7" | "30" | "all";
+interface Incident {
+  id: number;
+  title: string;
+  description: string;
+  severity: string;
+  reported_at: string;
 }
 
-const Graphs: React.FC<GraphsProps> = ({
-  pieData,
-  lineChartData,
-  lineChartRange,
-}) => {
-  const COLORS = ["#2ed6b4", "#fff051", "#ff7a7a"];
+interface GraphsProps {
+  sortedIncidents: Incident[];
+}
+
+const Graphs: React.FC<GraphsProps> = ({ sortedIncidents }) => {
+  const [lineChartRange, setLineChartRange] = useState<"7" | "30" | "all">("7");
+
+  const pieData = useMemo(() => {
+    const counts = { Low: 0, Medium: 0, High: 0 };
+    sortedIncidents.forEach((incident) => {
+      counts[incident.severity as "Low" | "Medium" | "High"]++;
+    });
+
+    return [
+      [
+        { type: "string", label: "Severity" },
+        { type: "number", label: "Count" },
+        { type: "string", role: "tooltip" },
+      ],
+      ["Low", counts.Low, `Low Severity: ${counts.Low} incident(s).`],
+      [
+        "Medium",
+        counts.Medium,
+        `Medium Severity: ${counts.Medium} incident(s).`,
+      ],
+      ["High", counts.High, `High Severity: ${counts.High} incident(s).`],
+    ];
+  }, [sortedIncidents]);
+
+  const lineChartData = useMemo(() => {
+    const timeline: { [date: string]: number } = {};
+    sortedIncidents.forEach((incident) => {
+      const date = new Date(incident.reported_at).toLocaleDateString("en-CA");
+      timeline[date] = (timeline[date] || 0) + 1;
+    });
+
+    const allData = Object.entries(timeline)
+      .map(([date, count]) => {
+        const formattedTooltip = `${count} incident(s) on ${new Date(
+          date
+        ).toDateString()}.`;
+        return [date, count, formattedTooltip];
+      })
+      .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime());
+
+    const data = [
+      [
+        { type: "string", label: "Date" },
+        { type: "number", label: "Incidents" },
+        { type: "string", role: "tooltip" },
+      ],
+      ...allData,
+    ];
+
+    if (lineChartRange === "all") return data;
+
+    const days = parseInt(lineChartRange, 10);
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+
+    return [
+      data[0],
+      ...data.slice(1).filter(([date]) => new Date(date as string) >= cutoff),
+    ];
+  }, [sortedIncidents, lineChartRange]);
 
   return (
     <div className="flex flex-col items-center w-full">
       {/* Line Chart */}
-      <div className="flex flex-col items-center mb-6 bg-[#F1EFEC] p-6 rounded-2xl">
-        <h2 className="text-xl font-semibold mt-5 mb-4">Incidents Over Time</h2>
-        <div className="mb-4">
+      <div className="flex flex-col items-center mb-6 bg-[#1e1e1e] p-6 rounded-2xl border border-[#333] w-full">
+        <div className="flex justify-between items-center w-full mb-4">
+          <h2 className="text-xl font-semibold text-white">
+            Incidents Over Time
+          </h2>
           <select
+            className="bg-[#2e2e2e] text-white px-3 py-1 rounded border border-[#444]"
             value={lineChartRange}
-            onChange={(_e) => {}}
-            className="border-gray-300 border p-2 rounded-2xl"
+            onChange={(e) =>
+              setLineChartRange(e.target.value as "7" | "30" | "all")
+            }
           >
             <option value="7">Last 7 Days</option>
             <option value="30">Last 30 Days</option>
             <option value="all">All Time</option>
           </select>
         </div>
-
-        <div className="w-full h-64 mr-12.5 mb-5">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={lineChartData}>
-              <XAxis dataKey="date" />
-              <YAxis allowDecimals={false} />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="count"
-                stroke="#8884d8"
-                strokeWidth={2}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+        <div className="w-full h-64 mb-5">
+          <Chart
+            chartType="LineChart"
+            width="100%"
+            height="100%"
+            data={lineChartData}
+            options={{
+              chartArea: { width: "80%" },
+              hAxis: { title: "Date", textStyle: { color: "#fff" } },
+              vAxis: { title: "Incidents", textStyle: { color: "#fff" } },
+              backgroundColor: "#1e1e1e",
+              colors: ["#8884d8"],
+              tooltip: {
+                isHtml: true,
+                textStyle: { color: "#fff", fontSize: 14 },
+                backgroundColor: "#333",
+              },
+              legend: "none",
+            }}
+          />
         </div>
       </div>
 
       {/* Pie Chart */}
-      <div className="flex flex-col items-center w-full bg-[#F1EFEC] p-6 rounded-2xl">
-        <h2 className="text-xl font-semibold mt-5 mb-4">
+      <div className="flex flex-col items-center w-full bg-[#1e1e1e] p-6 rounded-2xl border border-[#333]">
+        <h2 className="text-xl font-semibold mt-5 mb-4 text-white">
           Severity Distribution
         </h2>
-        <div className="w-full h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={pieData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label
-              >
-                {pieData.map((_entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+        <div className="w-full h-50">
+          <Chart
+            chartType="PieChart"
+            width="100%"
+            height="100%"
+            data={pieData}
+            options={{
+              is3D: true,
+              slices: {
+                0: { color: "#26b79f" }, // Low
+                1: { color: "#e6dc49" }, // Medium
+                2: { color: "#e06666" }, // High
+              },
+              backgroundColor: "#1e1e1e",
+              chartArea: {
+                left: 50,
+                top: 0,
+                width: "100%",
+                height: "100%",
+              },
+              tooltip: {
+                isHtml: true,
+                textStyle: { color: "#fff", fontSize: 14 },
+                backgroundColor: "#333",
+              },
+              legend: {
+                textStyle: { color: "#fff" },
+              },
+              pieSliceTextStyle: {
+                color: "black",
+              },
+            }}
+          />
         </div>
-        <h2 className="text-lg font-semibold mt-4 mb-2">
-            Total Incidents: {pieData.reduce((acc, cur) => acc + cur.value, 0)} 
+        <h2 className="text-xl font-semibold mt-5 mb-4 text-white">
+          Total Incidents: {sortedIncidents.length}
         </h2>
       </div>
     </div>

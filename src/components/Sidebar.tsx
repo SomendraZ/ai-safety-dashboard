@@ -1,4 +1,3 @@
-// Sidebar.tsx
 import React from "react";
 
 interface SidebarProps {
@@ -9,7 +8,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, closeSidebar }) => {
   return (
     <aside
-      className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${
+      className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-gray-800 border-r border-gray-700 ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"
       }`}
       aria-label="Sidebar"
@@ -19,11 +18,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, closeSidebar }) => {
           <li>
             <a
               href="#"
-              className="flex items-center p-2 text-white bg-blue-600 rounded-2xl dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600"
-              onClick={closeSidebar} // Close sidebar on Dashboard click
-            >
+              className="flex items-center p-2 text-white bg-blue-500 rounded-2xl hover:bg-blue-600"
+              onClick={closeSidebar}
+            >   
               <svg
-                className="w-5 h-5 text-white transition duration-75 dark:text-white"
+                className="w-5 h-5 text-white transition duration-75"
                 fill="currentColor"
                 viewBox="0 0 22 21"
               >

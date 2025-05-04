@@ -1,5 +1,4 @@
-// TopControls.tsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import danger from "../assets/danger.png";
 
 interface TopControlsProps {
@@ -25,14 +24,41 @@ const TopControls: React.FC<TopControlsProps> = ({
   handleSortSelect,
   handleReportIncident,
 }) => {
+  const filterRef = useRef<HTMLDivElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node) &&
+        dropdownVisible
+      ) {
+        toggleDropdown();
+      }
+      if (
+        sortRef.current &&
+        !sortRef.current.contains(event.target as Node) &&
+        dropdownSortVisible
+      ) {
+        toggleSortDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownVisible, dropdownSortVisible]);
+
   return (
     <div className="flex flex-col-reverse sm:flex-row items-center gap-3 justify-between mb-5 mt-3">
       <div className="flex gap-3 flex-wrap">
         {/* Filter Dropdown */}
-        <div className="relative inline-block">
+        <div className="relative inline-block" ref={filterRef}>
           <button
             onClick={toggleDropdown}
-            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-2xl text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 cursor-pointer"
+            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-2xl text-sm px-5 py-2.5 cursor-pointer"
           >
             {filter}
             <svg
@@ -49,14 +75,14 @@ const TopControls: React.FC<TopControlsProps> = ({
             </svg>
           </button>
           {dropdownVisible && (
-            <div className="absolute mt-2 w-44 bg-white dark:bg-[#F1EFEC] rounded-lg shadow">
+            <div className="absolute mt-2 w-44 bg-[#1E1E1E] text-white rounded-lg shadow border border-gray-700 z-10">
               <ul className="py-2 text-sm">
                 {["All", "Low", "Medium", "High"].map((severity) => (
                   <li key={severity}>
                     <a
                       href="#"
                       onClick={() => handleFilterSelect(severity)}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#547792] hover:text-white"
+                      className="block px-4 py-2 hover:bg-[#333] rounded"
                     >
                       {severity === "All" ? "All Severities" : severity}
                     </a>
@@ -68,10 +94,10 @@ const TopControls: React.FC<TopControlsProps> = ({
         </div>
 
         {/* Sort Dropdown */}
-        <div className="relative inline-block">
+        <div className="relative inline-block" ref={sortRef}>
           <button
             onClick={toggleSortDropdown}
-            className="text-white bg-green-700 hover:bg-green-800 font-medium rounded-2xl text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 cursor-pointer"
+            className="text-white bg-green-700 hover:bg-green-800 font-medium rounded-2xl text-sm px-5 py-2.5 cursor-pointer"
           >
             {sortOrder === "newest" ? "Newest First" : "Oldest First"}
             <svg
@@ -88,14 +114,14 @@ const TopControls: React.FC<TopControlsProps> = ({
             </svg>
           </button>
           {dropdownSortVisible && (
-            <div className="absolute mt-2 w-44 bg-white dark:bg-[#F1EFEC] rounded-2xl shadow-lg">
+            <div className="absolute mt-2 w-44 bg-[#1E1E1E] text-white rounded-lg shadow border border-gray-700 z-10">
               <ul className="py-2 text-sm">
                 {["newest", "oldest"].map((order) => (
                   <li key={order}>
                     <a
                       href="#"
                       onClick={() => handleSortSelect(order)}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#547792] hover:text-white"
+                      className="block px-4 py-2 hover:bg-[#333] rounded"
                     >
                       {order === "newest" ? "Newest First" : "Oldest First"}
                     </a>

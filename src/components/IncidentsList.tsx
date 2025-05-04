@@ -30,11 +30,11 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
       {currentIncidents.map((incident) => (
         <div
           key={incident.id}
-          className="bg-[#F1EFEC] p-4 rounded-2xl shadow-sm"
+          className="bg-[#1E1E1E] border border-[#333] text-white p-4 rounded-2xl shadow"
         >
           <div className="flex flex-wrap items-center justify-between">
             <h3 className="text-xl font-bold">{incident.title}</h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-400">
               {new Date(incident.reported_at).toLocaleDateString("en-US", {
                 weekday: "short",
                 year: "numeric",
@@ -59,7 +59,7 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
 
             <button
               onClick={() => handleExpandDetails(incident.id)}
-              className="text-blue-500 text-sm cursor-pointer"
+              className="text-blue-400 text-sm hover:underline"
             >
               {expandedIncidentId === incident.id
                 ? "Hide Details"
@@ -68,27 +68,46 @@ const IncidentsList: React.FC<IncidentsListProps> = ({
           </div>
 
           {expandedIncidentId === incident.id && (
-            <p className="mt-2 text-gray-700">{incident.description}</p>
+            <p className="mt-2 text-gray-300">{incident.description}</p>
           )}
         </div>
       ))}
 
       {/* Pagination */}
-      <div className="flex justify-between mt-5">
+      <div className="flex justify-center items-center gap-4 mt-6">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-blue-600 text-white rounded-2xl disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer"
+          className="px-3 py-2 text-sm rounded-lg bg-[#2C2C2C] text-gray-300 hover:bg-[#3a3a3a] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Previous
         </button>
-        <p className="text-center text-sm font-bold">
-          Page {currentPage} of {totalPages}
-        </p>
+
+        {/* Page Numbers */}
+        <div className="flex gap-2">
+          {Array.from({ length: totalPages }, (_, index) => {
+            const page = index + 1;
+            const isActive = page === currentPage;
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-3 py-2 text-sm rounded-lg transition-all duration-150 ${
+                  isActive
+                    ? "bg-blue-600 text-white font-semibold"
+                    : "bg-[#2C2C2C] text-gray-300 hover:bg-[#3a3a3a]"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          })}
+        </div>
+
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-blue-600 text-white rounded-2xl disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer"
+          className="px-3 py-2 text-sm rounded-lg bg-[#2C2C2C] text-gray-300 hover:bg-[#3a3a3a] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Next
         </button>

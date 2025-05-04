@@ -3,9 +3,8 @@ import incidentsData from "../assets/incidents.json";
 import TopControls from "./TopControls";
 import IncidentsList from "./IncidentsList";
 import Graphs from "./Graphs";
-import ReportIncidentModal from "./ReportIncidentModal"; // Import the modal
+import ReportIncidentModal from "./ReportIncidentModal";
 
-// Type for incident
 interface Incident {
   id: number;
   title: string;
@@ -23,12 +22,9 @@ const Dashboard: React.FC = () => {
   const [expandedIncidentId, setExpandedIncidentId] = useState<number | null>(
     null
   );
-  const [lineChartRange, _setLineChartRange] = useState<"7" | "30" | "all">(
-    "7"
-  );
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const mockData: Incident[] = incidentsData;
 
@@ -48,13 +44,8 @@ const Dashboard: React.FC = () => {
     setCurrentPage(1);
   };
 
-  const handleReportIncident = () => {
-    setIsModalOpen(true); // Open modal when the button is clicked
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false); // Close modal
-  };
+  const handleReportIncident = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleReportIncidentSubmit = (
     title: string,
@@ -71,9 +62,17 @@ const Dashboard: React.FC = () => {
     setIncidents((prevIncidents) => [newIncident, ...prevIncidents]);
   };
 
-  const filteredIncidents = incidents.filter(
-    (incident) => filter === "All" || incident.severity === filter
-  );
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+
+  const filteredIncidents = incidents.filter((incident) => {
+    const incidentDate = new Date(incident.reported_at);
+    return filter === "All" || incident.severity === filter
+      ? incidentDate < tomorrow
+      : false;
+  });
 
   const sortedIncidents = filteredIncidents.sort((a, b) => {
     const dateA = new Date(a.reported_at);
@@ -82,55 +81,6 @@ const Dashboard: React.FC = () => {
       ? dateB.getTime() - dateA.getTime()
       : dateA.getTime() - dateB.getTime();
   });
-
-  // Pie chart data preparation
-  const severityCounts = incidents.reduce(
-    (acc, incident) => {
-      if (incident.severity === "Low") acc.low++;
-      if (incident.severity === "Medium") acc.medium++;
-      if (incident.severity === "High") acc.high++;
-      return acc;
-    },
-    { low: 0, medium: 0, high: 0 }
-  );
-
-  const pieData = [
-    { name: "Low", value: severityCounts.low },
-    { name: "Medium", value: severityCounts.medium },
-    { name: "High", value: severityCounts.high },
-  ];
-
-  // Line chart data (all incidents)
-  const timelineData = incidents.reduce(
-    (acc: { [key: string]: number }, incident) => {
-      const date = new Date(incident.reported_at).toLocaleDateString("en-CA"); // yyyy-mm-dd
-      acc[date] = (acc[date] || 0) + 1;
-      return acc;
-    },
-    {}
-  );
-
-  const fullTimelineChartData = Object.entries(timelineData)
-    .map(([date, count]) => ({
-      date,
-      count,
-    }))
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-  // Filter timeline data based on range
-  const getFilteredTimelineData = () => {
-    if (lineChartRange === "all") return fullTimelineChartData;
-
-    const days = parseInt(lineChartRange, 10);
-    const cutoffDate = new Date();
-    cutoffDate.setDate(cutoffDate.getDate() - days);
-
-    return fullTimelineChartData.filter(
-      (entry) => new Date(entry.date) >= cutoffDate
-    );
-  };
-
-  const filteredTimelineChartData = getFilteredTimelineData();
 
   const indexOfLastIncident = currentPage * itemsPerPage;
   const indexOfFirstIncident = indexOfLastIncident - itemsPerPage;
@@ -146,8 +96,7 @@ const Dashboard: React.FC = () => {
   const totalPages = Math.ceil(sortedIncidents.length / itemsPerPage);
 
   return (
-    <div className="bg-gray-100 dark:bg-[#94B4C1] min-h-screen p-6">
-      {/* Top Controls */}
+    <div className="bg-gray-900 text-white min-h-screen p-6">
       <TopControls
         filter={filter}
         sortOrder={sortOrder}
@@ -157,39 +106,28 @@ const Dashboard: React.FC = () => {
         toggleSortDropdown={() => setDropdownSortVisible(!dropdownSortVisible)}
         handleFilterSelect={handleFilterSelect}
         handleSortSelect={handleSortSelect}
-        handleReportIncident={handleReportIncident} // Trigger for modal
+        handleReportIncident={handleReportIncident}
       />
 
-      {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left - Incidents List */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="md:col-span-2">
           <IncidentsList
             currentIncidents={currentIncidents}
             expandedIncidentId={expandedIncidentId}
             handleExpandDetails={(id) => {
-              if (expandedIncidentId === id) {
-                setExpandedIncidentId(null); // Collapse if already open
-              } else {
-                setExpandedIncidentId(id); // Expand the new one
-              }
+              setExpandedIncidentId(expandedIncidentId === id ? null : id);
             }}
             currentPage={currentPage}
             totalPages={totalPages}
             handlePageChange={handlePageChange}
           />
         </div>
-        {/* Right - Graphs */}
+
         <div className="flex flex-col items-center">
-          <Graphs
-            pieData={pieData}
-            lineChartData={filteredTimelineChartData}
-            lineChartRange={lineChartRange}
-          />
+          <Graphs sortedIncidents={sortedIncidents} />
         </div>
       </div>
 
-      {/* Report Incident Modal */}
       <ReportIncidentModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}

@@ -5,5 +5,5 @@ export interface Incident {
   title: string;
   description: string;
   severity: Severity;
-  reported_at: string; // ISO Date string
+  reported_at: string;
 }
